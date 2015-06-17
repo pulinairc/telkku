@@ -3,7 +3,7 @@
 # rolle @ irc.quakenet.org, rolle_ @ IRCnet
 
 # Updated when:
-set versijonummero "0.2.20150616"
+set versijonummero "0.3.20150618"
 #------------------------------------------------------------------------------------
 # Elä herran tähen mäne koskemaan tai taivas putoaa niskaas!
 # Minun reviiri alkaa tästä.
@@ -14,17 +14,20 @@ package require tdom
 
 bind pub - !tv pub:telkku
 
+set tvurl "http://telkussa.fi/RSS/Channel/1" 
+
 proc pub:telkku { nick uhost hand chan text } { 
 
     if {[string trim $text] ne ""} {
 
-    	if {[string trim $text] eq "tv1"} { 
-    		set tvurl "http://telkussa.fi/RSS/Channel/1" 
-    	}
-  			  		
-	} else {
-		
-		putserv "PRIVMSG $chan :\002!tv\002 kanava (tämänhetkiset kanavat: tv1)"
+        if {[string trim $text] eq "tv1"} { 
+            set tvurl "http://telkussa.fi/RSS/Channel/1" 
+        }
+                    
+    } else {
+        
+        global tvurl
+        putserv "PRIVMSG $chan :\002!tv\002 kanava (oletus: tv1, tämänhetkiset kanavat: tv1)"
     
     }
 
@@ -36,9 +39,14 @@ proc pub:telkku { nick uhost hand chan text } {
     set descList [$root selectNodes /rss/channel/item/description/text()]
     set kuvaus [lindex $descList 0]
 
-	putserv "PRIVMSG $chan :\002$text\002: \002[$ohjelmanimi nodeValue]\002 - Kuvaus: [$kuvaus nodeValue]"
-	# putlog "PRIVMSG $chan :\002$text\002: $kello \002$ohjelma\002 $kuvaus"
+    if {[string trim $text] ne ""} {
 
+        putserv "PRIVMSG $chan :\002$text\002: \002[$ohjelmanimi nodeValue]\002 - Kuvaus: [$kuvaus nodeValue]"
+
+    } else {
+
+        putserv "PRIVMSG $chan :\002tv1\002: \002[$ohjelmanimi nodeValue]\002 - Kuvaus: [$kuvaus nodeValue]"
+    }
 }
 
 # Kukkuluuruu.
