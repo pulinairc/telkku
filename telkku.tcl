@@ -60,10 +60,14 @@ proc pub:telkku { nick uhost hand chan text } {
             set tvurl "http://telkussa.fi/RSS/Channel/103" 
         }
 
+        if {[string trim $text] eq "fox"} { 
+            set tvurl "http://telkussa.fi/RSS/Channel/77" 
+        }
+
     } else {
         
         global tvurl
-        putserv "PRIVMSG $chan :\002!tv\002 kanava (oletus: 1-5, tämänhetkiset kanavat: tv1, tv2, mtv3, nelonen, subtv, yleteema, jim, mtv, hero)"
+        putserv "PRIVMSG $chan :\002!tv\002 kanava (oletus: 1-5, tämänhetkiset kanavat: tv1, tv2, mtv3, nelonen, subtv, yleteema, jim, mtv, hero, fox)"
     
     }
 
