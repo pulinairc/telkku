@@ -23,11 +23,15 @@ proc pub:telkku { nick uhost hand chan text } {
         if {[string trim $text] eq "tv1"} { 
             set tvurl "http://telkussa.fi/RSS/Channel/1" 
         }
-                    
+
+        if {[string trim $text] eq "tv2"} { 
+            set tvurl "http://telkussa.fi/RSS/Channel/2" 
+        }
+
     } else {
         
         global tvurl
-        putserv "PRIVMSG $chan :\002!tv\002 kanava (oletus: tv1, tämänhetkiset kanavat: tv1)"
+        putserv "PRIVMSG $chan :\002!tv\002 kanava (oletus: tv1, tämänhetkiset kanavat: tv1, tv2)"
     
     }
 
@@ -41,11 +45,11 @@ proc pub:telkku { nick uhost hand chan text } {
 
     if {[string trim $text] ne ""} {
 
-        putserv "PRIVMSG $chan :\002$text\002: \002[$ohjelmanimi nodeValue]\002 - Kuvaus: [$kuvaus nodeValue]"
+        putserv "PRIVMSG $chan :\002$text\002: \002[$ohjelmanimi nodeValue]\002 - Kuvaus: [encoding convertfrom utf-8[$kuvaus nodeValue]]"
 
     } else {
 
-        putserv "PRIVMSG $chan :\002tv1\002: \002[$ohjelmanimi nodeValue]\002 - Kuvaus: [$kuvaus nodeValue]"
+        putserv "PRIVMSG $chan :\002tv1\002: \002[$ohjelmanimi nodeValue]\002 - Kuvaus: [encoding convertfrom utf-8[$kuvaus nodeValue]]"
     }
 }
 
