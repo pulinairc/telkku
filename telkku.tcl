@@ -28,10 +28,42 @@ proc pub:telkku { nick uhost hand chan text } {
             set tvurl "http://telkussa.fi/RSS/Channel/2" 
         }
 
+        if {[string trim $text] eq "mtv3"} { 
+            set tvurl "http://telkussa.fi/RSS/Channel/3" 
+        }
+
+        if {[string trim $text] eq "nelonen"} { 
+            set tvurl "http://telkussa.fi/RSS/Channel/4" 
+        }
+
+        if {[string trim $text] eq "subtv"} { 
+            set tvurl "http://telkussa.fi/RSS/Channel/5" 
+        }
+
+        if {[string trim $text] eq "yleteema"} { 
+            set tvurl "http://telkussa.fi/RSS/Channel/14" 
+        }
+
+        if {[string trim $text] eq "jim"} { 
+            set tvurl "http://telkussa.fi/RSS/Channel/56" 
+        }
+
+        if {[string trim $text] eq "liv"} { 
+            set tvurl "http://telkussa.fi/RSS/Channel/63" 
+        }
+
+        if {[string trim $text] eq "mtv"} { 
+            set tvurl "http://telkussa.fi/RSS/Channel/63" 
+        }
+
+        if {[string trim $text] eq "hero"} { 
+            set tvurl "http://telkussa.fi/RSS/Channel/103" 
+        }
+
     } else {
         
         global tvurl
-        putserv "PRIVMSG $chan :\002!tv\002 kanava (oletus: tv1, tämänhetkiset kanavat: tv1, tv2)"
+        putserv "PRIVMSG $chan :\002!tv\002 kanava (oletus: tv1, tämänhetkiset kanavat: tv1, tv2, mtv3, nelonen, subtv, yleteema, jim, mtv, hero)"
     
     }
 
@@ -45,11 +77,11 @@ proc pub:telkku { nick uhost hand chan text } {
 
     if {[string trim $text] ne ""} {
 
-        putserv "PRIVMSG $chan :\002$text\002: \002[$ohjelmanimi nodeValue]\002 - Kuvaus: [encoding convertfrom utf-8[$kuvaus nodeValue]]"
+        putserv "PRIVMSG $chan :\002$text\002: \002[$ohjelmanimi nodeValue]\002 - Kuvaus: [encoding convertfrom utf-8 [$kuvaus nodeValue]]"
 
     } else {
 
-        putserv "PRIVMSG $chan :\002tv1\002: \002[$ohjelmanimi nodeValue]\002 - Kuvaus: [encoding convertfrom utf-8[$kuvaus nodeValue]]"
+        putserv "PRIVMSG $chan :\002tv1\002: \002[$ohjelmanimi nodeValue]\002 - Kuvaus: [encoding convertfrom utf-8 [$kuvaus nodeValue]]"
     }
 }
 
