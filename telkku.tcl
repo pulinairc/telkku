@@ -3,7 +3,7 @@
 # rolle @ irc.quakenet.org, rolle_ @ IRCnet
 
 # Updated when:
-set versijonummero "0.3.20150618"
+set versijonummero "0.4.20150618"
 #------------------------------------------------------------------------------------
 # Elä herran tähen mäne koskemaan tai taivas putoaa niskaas!
 # Minun reviiri alkaa tästä.
@@ -64,10 +64,14 @@ proc pub:telkku { nick uhost hand chan text } {
             set tvurl "http://telkussa.fi/RSS/Channel/77" 
         }
 
+        if {[string trim $text] eq "ava"} { 
+            set tvurl "http://telkussa.fi/RSS/Channel/60" 
+        }
+
     } else {
         
         global tvurl
-        putserv "PRIVMSG $chan :\002!tv\002 kanava (oletus: 1-5, tämänhetkiset kanavat: tv1, tv2, mtv3, nelonen, subtv, yleteema, jim, mtv, hero, fox)"
+        putserv "PRIVMSG $chan :\002!tv\002 kanava (oletus: 1-5, tämänhetkiset kanavat: tv1, tv2, mtv3, nelonen, subtv, yleteema, jim, mtv, hero, fox, ava)"
     
     }
 
